@@ -26,19 +26,19 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         <PopupWithForm
             title="Редактировать профиль"
             name="profile"
+            buttonText="Сохранить"
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
         >
-            <label for="name-input" class="popup__label">
-                <input type="text" class="popup__input" id="name-input" name="name" value={name} onChange={e => setName(e.target.value)} placeholder="Имя" minlength="2" maxlength="40" required />
-                <span class="popup__input-error name-input-error"></span>
+            <label htmlFor="name-input" className="popup__label">
+                <input type="text" className="popup__input" id="name-input" name="name" value={name} onChange={e => setName(e.target.value)} placeholder="Имя" minLength="2" maxLength="40" required />
+                <span className="popup__input-error name-input-error"></span>
             </label>
-            <label for="about-input" class="popup__label">
-                <input type="text" class="popup__input" id="about-input" name="about" value={description} onChange={e => setDescription(e.target.value)} placeholder="О себе" minlength="2" maxlength="200" />
-                <span class="popup__input-error about-input-error"></span>
+            <label htmlFor="about-input" className="popup__label">
+                <input type="text" className="popup__input" id="about-input" name="about" value={description} onChange={e => setDescription(e.target.value)} placeholder="О себе" minLength="2" maxLength="200" />
+                <span className="popup__input-error about-input-error"></span>
             </label>
-            <button class="popup__button" type="submit">Сохранить</button>
         </PopupWithForm>
     );
 }

@@ -4,7 +4,6 @@ import PopupWithForm from './PopupWithForm';
 function DeleteCardPopup({ isOpen, onClose, onDeleteCard, cardToDelete }) {
 
     const handleSubmit = (e) => {
-        console.log(cardToDelete)
         e.preventDefault();
         onDeleteCard(cardToDelete);
     }
@@ -13,12 +12,11 @@ function DeleteCardPopup({ isOpen, onClose, onDeleteCard, cardToDelete }) {
         <PopupWithForm
             title="Вы уверены?"
             name="delete"
+            buttonText="Да"
             isOpen={isOpen}
             onClose={onClose}
             onSubmit={handleSubmit}
-        >
-            <button class="popup__button" type="submit">Да</button>
-        </PopupWithForm>
+        />
     );
 }
 
