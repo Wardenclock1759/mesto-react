@@ -84,21 +84,11 @@ function App() {
             .catch((error) => {
                 console.error(`Error updating avatar: ${error}`);
             });
-    }
+    }    
 
-    
-
-    function handleEditProfileClick() {
-        setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    }
-    
-    function handleAddPlaceClick() {
-        setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-    }
-
-    function handleEditAvatarClick() {
-        setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    }
+    const handlePopupToggle = (toggleFunction) => {
+        toggleFunction(prevState => !prevState);
+    };
 
     const handleCardClick = (card) => {
         setSelectedCard(card);
@@ -117,9 +107,9 @@ function App() {
                 <div class="page">
                     <Header />
                     <Main 
-                        onEditProfile={handleEditProfileClick}
-                        onAddPlace={handleAddPlaceClick}
-                        onEditAvatar={handleEditAvatarClick}
+                        onEditProfile={() => handlePopupToggle(setIsEditProfilePopupOpen)}
+                        onAddPlace={() => handlePopupToggle(setIsAddPlacePopupOpen)}
+                        onEditAvatar={() => handlePopupToggle(setIsEditAvatarPopupOpen)}
                         onCardClick={handleCardClick}
                         cards={cards}
                         onCardLike={handleCardLike}
