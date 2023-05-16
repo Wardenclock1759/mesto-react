@@ -26,7 +26,7 @@ const Card = ({ card, onCardClick, onCardLike, onCardDelete }) => {
     return (
         <li className="elements__element">
             <div className="elements__container">
-                <img className="elements__image" src={card.link} alt={cardAlt} onClick={handleClick}/>
+                <img className="elements__image" src={card.link} alt={cardAlt} onClick={handleClick} />
                 {isOwn && <button className='elements__delete-button' onClick={handleDeleteClick} />} 
             </div>
             <div className="elements__content">
