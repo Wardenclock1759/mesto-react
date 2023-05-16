@@ -6,6 +6,8 @@ import Main from "../components/Main";
 import Footer from "../components/Footer";
 import PopupWithForm from "../components/PopupWithForm";
 import ImagePopup from './ImagePopup';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -24,6 +26,30 @@ function App() {
             console.log(err);
           });
     }, []);
+
+    const handleUpdateUser = (data) => {
+        api.setProfileInfo(data)
+            .then((newUser) => {
+                setCurrentUser(newUser);
+                closeAllPopups();
+            })
+            .catch((error) => {
+                console.error(`Error updating user data: ${error}`);
+            });
+    }
+
+    const handleUpdateAvatar = (data) => {
+        api.updateAvatar(data)
+            .then((newUser) => {
+                setCurrentUser(newUser);
+                closeAllPopups();
+            })
+            .catch((error) => {
+                console.error(`Error updating avatar: ${error}`);
+            });
+    }
+
+    
 
     function handleEditProfileClick() {
         setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -60,21 +86,7 @@ function App() {
                         onCardClick={handleCardClick}
                     />
                     <Footer />
-                    <PopupWithForm
-                        title="Редактировать профиль"
-                        name="profile"
-                        isOpen={isEditProfilePopupOpen}
-                        onClose={closeAllPopups}
-                    >
-                        <label for="name-input" class="popup__label">
-                            <input type="text" class="popup__input" id="name-input" name="name" placeholder="Имя" minlength="2" maxlength="40" required />
-                            <span class="popup__input-error name-input-error"></span>
-                        </label>
-                        <label for="about-input" class="popup__label">
-                            <input type="text" class="popup__input" id="about-input" name="about" placeholder="О себе" minlength="2" maxlength="200" />
-                            <span class="popup__input-error about-input-error"></span>
-                        </label>
-                    </PopupWithForm>
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} /> 
                     <PopupWithForm
                         title="Новое место"
                         name="photo"
@@ -91,18 +103,7 @@ function App() {
                         </label>
                         <button class="popup__button" type="submit">Создать</button>
                     </PopupWithForm>
-                    <PopupWithForm
-                        title="Обновить аватар"
-                        name="avatar"
-                        isOpen={isEditAvatarPopupOpen}
-                        onClose={closeAllPopups}
-                    >
-                        <label for="avatar-input" class="popup__label">
-                            <input type="url" class="popup__input" id="avatar-input" name="avatar" placeholder="Ссылка на картинку" required />
-                            <span class="popup__input-error avatar-input-error"></span>
-                        </label>
-                        <button class="popup__button" type="submit">Сохранить</button>
-                    </PopupWithForm>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
                     <PopupWithForm
                         title="Вы уверены?"
                         name="delete"
